@@ -25,7 +25,7 @@ const Profile = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="grid grid-cols-2 gap-2">
+                <Button variant="outline" className="flex gap-2">
                     <CircleUser />
                     {username}
                 </Button>

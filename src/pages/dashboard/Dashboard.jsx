@@ -1,4 +1,5 @@
-import Profile from "./components/Profile";
+import { Button } from "@/components/ui/button";
+import Profile from "./components/profile";
 
 const Dashboard = () => {
     return (
@@ -50,9 +51,10 @@ const Dashboard = () => {
                                     Jan 20, 2023 - Feb 09, 2023
                                 </button>
                             </div>
-                            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+                            {/* <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
                                 Download
-                            </button>
+                            </button> */}
+                            <Button>Download</Button>
                         </div>
                     </div>
                     <div dir="ltr" data-orientation="horizontal" className="space-y-4">

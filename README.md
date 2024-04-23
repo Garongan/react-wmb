@@ -29,3 +29,7 @@ To run the project, follow these steps:
 5. Open your browser and visit `http://localhost:3000` to view the application.
 
 That's it! You should now have the React + Vite project up and running using Bun and PNPM.
+
+### Colors Pallete
+
+[color pallete by coolors](https://coolors.co/fafafa-18181b-3f84e5-09d1e3-f7c700)

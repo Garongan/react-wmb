@@ -1,5 +1,5 @@
 import { Ship } from "lucide-react";
-import RegistrationForm from "../components/registrationForm";
+import RegistrationForm from "../components/registration-form";
 import { Link } from "react-router-dom";
 
 const RegistrationUser = () => {

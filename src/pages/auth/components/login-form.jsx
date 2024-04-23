@@ -1,12 +1,12 @@
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import useAuthService from "@/services/useAuthService";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import useAuthService from "@/services/useAuthService";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
     username: z.string().min(4, {
@@ -18,7 +18,6 @@ const schema = z.object({
 });
 
 const LoginForm = () => {
-
     const service = useAuthService();
     const navigate = useNavigate();
 
@@ -28,18 +27,18 @@ const LoginForm = () => {
             username: "",
             password: "",
         },
-        mode: "onChange"
+        mode: "onChange",
     });
 
     const onSubmit = async (data) => {
         try {
             const response = await service.login(data);
-            if (response && response.statusCode === 200){
+            if (response && response.statusCode === 200) {
                 localStorage.setItem("user", JSON.stringify(response.data));
                 navigate("/dashboard");
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 
@@ -56,7 +55,7 @@ const LoginForm = () => {
                                 <FormControl>
                                     <Input type="text" placeholder="Input username here..." {...field} />
                                 </FormControl>
-                                <FormMessage/>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -70,7 +69,7 @@ const LoginForm = () => {
                                 <FormControl>
                                     <Input type="password" placeholder="Input password here..." {...field} />
                                 </FormControl>
-                                <FormMessage/>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />

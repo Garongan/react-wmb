@@ -1,11 +1,19 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 
 import PropTypes from "prop-types";
 import ActionList from "../components/action-list";
 
 const DataTable = ({ data }) => {
     return (
-        <Table>
+        <Table className="rounded-md">
             <TableCaption>List of Table Menu</TableCaption>
             <TableHeader>
                 <TableRow>

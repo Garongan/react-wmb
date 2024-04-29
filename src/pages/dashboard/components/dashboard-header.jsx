@@ -28,8 +28,8 @@ const DashboardHeader = () => {
     return (
         <>
             <div className="border-b">
-                <div className="flex h-16 items-center px-4">
-                    <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">
+                <div className="flex h-16 items-center">
+                    <nav className="flex items-start space-x-4 lg:space-x-6">
                         {nav.map((item, index) => (
                             <Link key={index} to={item.link} className="text-sm font-medium transition-colors hover:text-primary">
                                 {item.title}

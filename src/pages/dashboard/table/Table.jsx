@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const Table = () => {
     return (
         <>
-            <div className="space-y-4 shadow">
+            <div className="rounded-lg border border-zinc-200 bg-white text-zinc-950 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
                 <div className="p-4">
                     <Outlet />
                 </div>

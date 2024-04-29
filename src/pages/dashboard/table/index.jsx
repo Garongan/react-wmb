@@ -14,7 +14,7 @@ const Index = () => {
     isPending || (!isSuccess && <div>Loading...</div>);
     return (
         <>
-            <Link to="/dashboard/table/new" className="float-right">
+            <Link to="/dashboard/table/new">
                 <Button>New Table</Button>
             </Link>
             <DataTable data={data?.data} />

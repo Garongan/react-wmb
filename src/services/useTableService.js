@@ -16,10 +16,22 @@ const useTableService = () => {
         return data;
     };
 
+    const updateById = async (id, payload) => {
+        const { data } = await axiosInstance.put(`/tables/${id}`, payload);
+        return data;
+    };
+
+    const getById = async (id) => {
+        const { data } = await axiosInstance.get(`/tables/${id}`);
+        return data;
+    };
+
     return {
         getAll,
         create,
         deleteById,
+        updateById,
+        getById,
     };
 };
 

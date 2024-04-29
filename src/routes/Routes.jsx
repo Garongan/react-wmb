@@ -10,7 +10,7 @@ import Menu from "@/pages/dashboard/menu/Menu";
 import Table from "@/pages/dashboard/table/Table";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import NewTable from "@/pages/dashboard/table/new-table";
+import TableForm from "@/pages/dashboard/table/table-form";
 import Index from "@/pages/dashboard/table";
 
 const Routes = createBrowserRouter([
@@ -58,7 +58,7 @@ const Routes = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Dashboard />,
+                element: <Dashboard title="Dashboard" />,
             },
             {
                 path: "table",
@@ -66,12 +66,16 @@ const Routes = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Index />,
+                        element: <Index title="Table" />,
                     },
                     {
                         path: "new",
-                        element: <NewTable />,
+                        element: <TableForm title="Table Form" />,
                     },
+                    {
+                        path: "update/:id",
+                        element: <TableForm title="Updata Table Form"/>,
+                    }
                 ],
             },
             {

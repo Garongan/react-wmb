@@ -1,6 +1,6 @@
 import useMenuService from "@/services/useMenuService";
 import { useQuery } from "@tanstack/react-query";
-import DataTable from "./data-table";
+import DataTable from "./menu-list";
 
 const Menu = () => {
     const { getAll } = useMenuService();

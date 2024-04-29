@@ -10,6 +10,8 @@ import Menu from "@/pages/dashboard/menu/Menu";
 import Table from "@/pages/dashboard/table/Table";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
+import NewTable from "@/pages/dashboard/table/new-table";
+import Index from "@/pages/dashboard/table";
 
 const Routes = createBrowserRouter([
     {
@@ -61,6 +63,16 @@ const Routes = createBrowserRouter([
             {
                 path: "table",
                 element: <Table />,
+                children: [
+                    {
+                        index: true,
+                        element: <Index />,
+                    },
+                    {
+                        path: "new",
+                        element: <NewTable />,
+                    },
+                ],
             },
             {
                 path: "menu",

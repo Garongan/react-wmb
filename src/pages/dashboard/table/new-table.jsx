@@ -17,8 +17,8 @@ import useTableService from "@/services/useTableService";
 import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
+    name: z.string().min(2, {
+        message: "Name must be at least 2 characters.",
     }),
 });
 
@@ -28,13 +28,17 @@ const NewTable = () => {
 
     const form = useForm({
         resolver: zodResolver(formSchema),
-        mode: "onSubmit",
+        mode: "onChange",
+        defaultValues: {
+            name: "",
+        },
     });
 
     const onSubmit = async (data) => {
+        data = { ...data, name: data.name.toUpperCase() };
         try {
             const response = await service.create(data);
-            if (response && response.statusCode === 200) {
+            if (response && response.statusCode === 201) {
                 navigate("/dashboard/table");
             }
         } catch (error) {
@@ -52,11 +56,13 @@ const NewTable = () => {
                         <FormItem>
                             <FormLabel>Table name</FormLabel>
                             <FormControl>
-                                <Input placeholder="T0..." {...field} />
+                                <Input
+                                    placeholder="T0..."
+                                    {...field}
+                                    className="uppercase"
+                                />
                             </FormControl>
-                            <FormDescription>
-                                Tambah Table Baru
-                            </FormDescription>
+                            <FormDescription>Tambah Table Baru</FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}

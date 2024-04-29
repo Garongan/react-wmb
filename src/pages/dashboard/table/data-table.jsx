@@ -11,7 +11,7 @@ import {
 import PropTypes from "prop-types";
 import ActionList from "../components/action-list";
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, deleteItem }) => {
     return (
         <Table className="rounded-md">
             <TableCaption>List of Table Menu</TableCaption>
@@ -28,7 +28,7 @@ const DataTable = ({ data }) => {
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell className="text-right">
-                            <ActionList />
+                            <ActionList id={item.id} deleteItem={deleteItem} />
                         </TableCell>
                     </TableRow>
                 ))}
@@ -39,6 +39,7 @@ const DataTable = ({ data }) => {
 
 DataTable.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
+    deleteItem: PropTypes.object,
 };
 
 export default DataTable;

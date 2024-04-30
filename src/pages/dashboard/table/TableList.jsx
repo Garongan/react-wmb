@@ -1,11 +1,10 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
-    TableRow,
+    TableRow
 } from "@/components/ui/table";
 
 import PropTypes from "prop-types";
@@ -14,7 +13,6 @@ import ActionList from "../components/action-list";
 const TableList = ({ data, deleteItem }) => {
     return (
         <Table className="rounded-md">
-            <TableCaption>List of Table Menu</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-[100px]">No</TableHead>

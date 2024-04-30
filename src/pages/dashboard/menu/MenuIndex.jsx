@@ -11,6 +11,9 @@ import {
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MenuList from "./MenuList";
+import PaginationComponent from "@/shared/PaginationComponent";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -25,10 +28,12 @@ const MenuIndex = ({ title }) => {
 const DataList = ({ title }) => {
     const queryClient = useQueryClient();
     const { getAll, deleteById } = useMenuService();
+    const [page, setPage] = useState(1);
+    const params = useParams();
 
     const { data, isSuccess } = useQuery({
         queryKey: ["menus"],
-        queryFn: getAll,
+        queryFn: () => getAll(params),
     });
 
     const deleteItem = useMutation({
@@ -45,7 +50,7 @@ const DataList = ({ title }) => {
         },
     });
 
-    !isSuccess && <div>Loading...</div>;
+    if (!isSuccess) return <div>Loading...</div>;
 
     return (
         <>
@@ -58,6 +63,7 @@ const DataList = ({ title }) => {
                 <Button>New Menu</Button>
             </Link>
             <MenuList data={data?.data} deleteItem={deleteItem} />
+            <PaginationComponent paginationResponse={data?.paginationResponse} />
         </>
     );
 };

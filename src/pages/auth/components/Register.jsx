@@ -1,7 +1,7 @@
 import { Ship } from "lucide-react";
 import PropTypes from "prop-types";
-import RegistrationForm from "./RegistrationForm";
 import { useNavigate } from "react-router-dom";
+import RegistrationForm from "./RegistrationForm";
 
 const Register = ({ title, isAdmin }) => {
     const navigate = useNavigate();
@@ -9,11 +9,22 @@ const Register = ({ title, isAdmin }) => {
         localStorage.removeItem("user");
         navigate("/login");
     };
+    const backButton = () => {
+        return (
+            <button
+                onClick={() => navigate("/dashboard")}
+                className="hover:bg-zinc-900 hover:text-zinc-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 absolute right-32 top-4 md:right-32 md:top-8"
+            >
+                Back
+            </button>
+        );
+    };
     return (
         <>
             <div className="min-h-screen flex items-center justify-center">
                 <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl">
                     <div className="container relative grid h-[800px] flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
+                        {isAdmin && backButton()}
                         <button
                             onClick={handleToLogin}
                             className="hover:bg-zinc-900 hover:text-zinc-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 absolute right-4 top-4 md:right-8 md:top-8"
@@ -24,6 +35,7 @@ const Register = ({ title, isAdmin }) => {
                             <div className="absolute inset-0 bg-zinc-900">
                                 <img src="/public/banner.jpg" alt="banner" />
                             </div>
+
                             <div className="relative z-20 flex items-center text-lg font-medium bg-gradient-to-b from-black to-tranparent p-5">
                                 <Ship className="me-3" />
                                 Warung Makan Bahari

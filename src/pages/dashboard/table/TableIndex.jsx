@@ -54,7 +54,7 @@ const DataList = ({ title }) => {
         },
     });
 
-    !isSuccess && <div>Loading...</div>;
+    if (!isSuccess) return <div>Loading...</div>;
 
     return (
         <>

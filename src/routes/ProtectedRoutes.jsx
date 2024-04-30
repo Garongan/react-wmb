@@ -9,14 +9,22 @@ const ProtectedRoutes = ({ children, path }) => {
 
     useEffect(() => {
         const checkToken = async () => {
-            if (!localStorage.getItem("user") || !(await authService.validateToken())) {
+            if (
+                !localStorage.getItem("user") ||
+                !(await authService.validateToken())
+            ) {
                 navigate("/login");
-            } else if (path === "register.admin" && JSON.parse(localStorage.getItem("user")).roles.includes("ROLE_SUPER_ADMIN")) {
+            } else if (
+                path === "register/admin" &&
+                JSON.parse(localStorage.getItem("user")).roles.includes(
+                    "ROLE_SUPER_ADMIN"
+                )
+            ) {
                 navigate("/register/admin");
             }
         };
         checkToken();
-    }, [authService, navigate, path]);
+    }, [navigate, path]);
 
     return <>{children}</>;
 };

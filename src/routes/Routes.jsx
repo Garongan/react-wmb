@@ -1,17 +1,18 @@
 import Error404 from "@/components/ui/error404";
 import Login from "@/pages/auth/Login";
-import RegistrationAdmin from "@/pages/auth/admin/RegistrationAdmin";
-import RegistrationUser from "@/pages/auth/user/RegistrationUser";
+import Registration from "@/pages/auth/Registration";
+import Register from "@/pages/auth/components/Register";
 import DashboardLayout from "@/pages/dashboard/DashboardLayout";
 import Bills from "@/pages/dashboard/bills/Bills";
 import Customers from "@/pages/dashboard/customers/Customers";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
-import Menu from "@/pages/dashboard/menu/Menu";
-import Table from "@/pages/dashboard/table/Table";
+import TableIndex from "@/pages/dashboard/table/TableIndex";
+import MenuIndex from "@/pages/dashboard/menu/MenuIndex";
+import TableForm from "@/pages/dashboard/table/TableForm";
+import TableLayout from "@/pages/dashboard/table/TableLayout";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import TableForm from "@/pages/dashboard/table/table-form";
-import Index from "@/pages/dashboard/table";
+import MenuLayout from "@/pages/dashboard/menu/MenuLayout";
 
 const Routes = createBrowserRouter([
     {
@@ -24,17 +25,17 @@ const Routes = createBrowserRouter([
     },
     {
         path: "/register",
-        element: <RegistrationUser />,
+        element: <Registration />,
         children: [
             {
                 index: true,
-                element: <RegistrationUser />,
+                element: <Register title="user" isAdmin={false} />,
             },
             {
                 path: "admin",
                 element: (
-                    <ProtectedRoutes path="register.admin">
-                        <RegistrationAdmin />
+                    <ProtectedRoutes path="register/admin">
+                        <Register title="admin" isAdmin={true} />
                     </ProtectedRoutes>
                 ),
             },
@@ -42,7 +43,11 @@ const Routes = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Login />,
+        element: (
+            <ProtectedRoutes>
+                <Login />
+            </ProtectedRoutes>
+        ),
     },
     {
         path: "/",
@@ -62,11 +67,11 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "table",
-                element: <Table />,
+                element: <TableLayout />,
                 children: [
                     {
                         index: true,
-                        element: <Index title="Table" />,
+                        element: <TableIndex title="Table" />,
                     },
                     {
                         path: "new",
@@ -74,13 +79,27 @@ const Routes = createBrowserRouter([
                     },
                     {
                         path: "update/:id",
-                        element: <TableForm title="Updata Table Form"/>,
-                    }
+                        element: <TableForm title="Updata Table Form" />,
+                    },
                 ],
             },
             {
                 path: "menu",
-                element: <Menu />,
+                element: <MenuLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <MenuIndex title="Menu" />,
+                    },
+                    {
+                        path: "new",
+                        element: <TableForm title="Menu Form" />,
+                    },
+                    {
+                        path: "update/:id",
+                        element: <TableForm title="Update Menu Form" />,
+                    },
+                ],
             },
             {
                 path: "customers",

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import useTableService from "@/services/useTableService";
 import {
     QueryClient,
@@ -7,14 +8,13 @@ import {
     useQuery,
     useQueryClient,
 } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import TableList from "./table-list";
 import PropTypes from "prop-types";
-import { toast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
+import TableList from "./TableList";
 
 const queryClient = new QueryClient();
 
-const Index = ({ title }) => {
+const TableIndex = ({ title }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <DataList title={title} />
@@ -71,7 +71,7 @@ const DataList = ({ title }) => {
     );
 };
 
-Index.propTypes = {
+TableIndex.propTypes = {
     title: PropTypes.string,
 };
 
@@ -79,4 +79,4 @@ DataList.propTypes = {
     title: PropTypes.string,
 };
 
-export default Index;
+export default TableIndex;

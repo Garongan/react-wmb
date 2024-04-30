@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useNavigate } from "react-router-dom";
 import useAuthService from "@/services/useAuthService";
 import PropTypes from "prop-types";
+import { toast } from "@/components/ui/use-toast";
 
 const schema = z.object({
     name: z.string().min(4, {
@@ -44,6 +45,7 @@ const RegistrationForm = ({ isAdmin }) => {
             if (isAdmin) {
                 const response = await service.registerAdmin(data);
                 if (response && response.statusCode === 201) {
+                    localStorage.removeItem("user");
                     navigate("/login");
                 }
             } else {
@@ -53,13 +55,17 @@ const RegistrationForm = ({ isAdmin }) => {
                 }
             }
         } catch (error) {
-            console.log(error);
+            toast({
+                variant: "destructive",
+                title: "Upsss! Terdapat Kesalahan Register.",
+                description: error.message,
+            });
         }
     };
     return (
         <>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4" autoComplete="off">
                     <FormField
                         control={form.control}
                         name="name"

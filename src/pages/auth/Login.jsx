@@ -1,5 +1,5 @@
 import { Ship } from "lucide-react";
-import LoginForm from "./components/login-form";
+import LoginForm from "./components/LoginForm";
 import { Link } from "react-router-dom";
 
 const Login = () => {

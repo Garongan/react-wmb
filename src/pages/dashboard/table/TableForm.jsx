@@ -91,6 +91,7 @@ const TableForm = ({ title }) => {
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-8"
+                    autoComplete="off"
                 >
                     <FormField
                         control={form.control}

@@ -1,17 +1,24 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 
 import PropTypes from "prop-types";
 import ActionList from "../components/action-list";
 
-const DataTable = ({ data }) => {
+const TableList = ({ data, deleteItem }) => {
     return (
-        <Table>
+        <Table className="rounded-md">
             <TableCaption>List of Table Menu</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-[100px]">No</TableHead>
                     <TableHead>Name</TableHead>
-                    <TableHead>Price</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
             </TableHeader>
@@ -20,9 +27,8 @@ const DataTable = ({ data }) => {
                     <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{item.name}</TableCell>
-                        <TableCell>{new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR'}).format(item.price)}</TableCell>
                         <TableCell className="text-right">
-                            <ActionList />
+                            <ActionList id={item.id} deleteItem={deleteItem} />
                         </TableCell>
                     </TableRow>
                 ))}
@@ -31,8 +37,9 @@ const DataTable = ({ data }) => {
     );
 };
 
-DataTable.propTypes = {
+TableList.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
+    deleteItem: PropTypes.object,
 };
 
-export default DataTable;
+export default TableList;

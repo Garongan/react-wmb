@@ -8,7 +8,7 @@ const CustomersList = ({ data, deleteItem }) => {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[100px]">No</TableHead>
+                        <TableHead className="w-[50px]">No</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Phone Number</TableHead>
                         <TableHead className="text-right">Actions</TableHead>

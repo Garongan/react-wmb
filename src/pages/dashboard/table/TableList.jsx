@@ -15,7 +15,7 @@ const TableList = ({ data, deleteItem }) => {
         <Table className="rounded-md">
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">No</TableHead>
+                    <TableHead className="w-[50px]">No</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                 </TableRow>

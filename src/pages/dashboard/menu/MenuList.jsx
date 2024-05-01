@@ -17,7 +17,7 @@ const MenuList = ({ data, deleteItem }) => {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[100px]">No</TableHead>
+                        <TableHead className="w-[50px]">No</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Price</TableHead>
                         <TableHead>Image</TableHead>

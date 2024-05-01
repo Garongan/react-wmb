@@ -3,7 +3,9 @@ import Login from "@/pages/auth/Login";
 import Registration from "@/pages/auth/Registration";
 import Register from "@/pages/auth/components/Register";
 import DashboardLayout from "@/pages/dashboard/DashboardLayout";
-import Bills from "@/pages/dashboard/bills/Bills";
+import CustomersForm from "@/pages/dashboard/customers/CustomersForm";
+import CustomersIndex from "@/pages/dashboard/customers/CustomersIndex";
+import CustomersLayout from "@/pages/dashboard/customers/CustomersLayout";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
 import MenuForm from "@/pages/dashboard/menu/MenuForm";
 import MenuIndex from "@/pages/dashboard/menu/MenuIndex";
@@ -13,9 +15,9 @@ import TableIndex from "@/pages/dashboard/table/TableIndex";
 import TableLayout from "@/pages/dashboard/table/TableLayout";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import CustomersLayout from "@/pages/dashboard/customers/CustomersLayout";
-import CustomersIndex from "@/pages/dashboard/customers/CustomersIndex";
-import CustomersForm from "@/pages/dashboard/customers/CustomersForm";
+import BillsLayout from "@/pages/dashboard/bills/BillsLayout";
+import BillsIndex from "@/pages/dashboard/bills/BillsIndex";
+import BillsForm from "@/pages/dashboard/bills/BillsForm";
 
 const Routes = createBrowserRouter([
     {
@@ -120,11 +122,25 @@ const Routes = createBrowserRouter([
                         path: "update/:id",
                         element: <CustomersForm title="Update Customer Form" />,
                     },
-                ]
+                ],
             },
             {
                 path: "bills",
-                element: <Bills />,
+                element: <BillsLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <BillsIndex title="Bills" />,
+                    },
+                    {
+                        path: "new",
+                        element: <BillsForm title="Create Bill Form" />,
+                    },
+                    {
+                        path: "update/:id",
+                        element: <BillsForm title="Update Bill Form" />,
+                    },
+                ],
             },
         ],
     },

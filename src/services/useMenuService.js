@@ -1,9 +1,8 @@
 import axiosInstance from "@/api/axiosInstance";
 
 const useMenuService = () => {
-    const getAll = async (params) => {
-        console.log(params);
-        const { data } = await axiosInstance.get("/menus", { params });
+    const getAll = async (query) => {
+        const { data } = await axiosInstance.get("/menus", {params: query});
         return data;
     };
 

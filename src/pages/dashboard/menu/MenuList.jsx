@@ -38,9 +38,9 @@ const MenuList = ({ data, deleteItem }) => {
                             <TableCell>
                                 {item.imageResponse ? (
                                     <img
-                                        src={item.imageResponse}
+                                        src={item.imageResponse.url}
                                         alt={item.name}
-                                        className="h-32 w-60 object-cover"
+                                        className="h-32 w-60 object-cover rounded-xl"
                                     />
                                 ) : (
                                     <Skeleton className="h-32 w-60 rounded-xl" />
@@ -50,6 +50,7 @@ const MenuList = ({ data, deleteItem }) => {
                                 <ActionList
                                     id={item.id}
                                     deleteItem={deleteItem}
+                                    fromWhat="menu"
                                 />
                             </TableCell>
                         </TableRow>

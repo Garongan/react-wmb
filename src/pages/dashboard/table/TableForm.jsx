@@ -21,7 +21,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const formSchema = z.object({
     name: z.string().min(2, {
-        message: "Name must be at least 2 characters.",
+        message: "Nama harus lebih dari 2 karakter.",
     }),
 });
 
@@ -78,7 +78,7 @@ const TableForm = ({ title }) => {
             form.setValue("name", data?.data.name);
         };
         fetch();
-    }, []);
+    }, [id, form.setValue]);
 
     return (
         <>

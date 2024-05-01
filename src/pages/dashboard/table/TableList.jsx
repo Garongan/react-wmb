@@ -26,7 +26,7 @@ const TableList = ({ data, deleteItem }) => {
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell className="text-right">
-                            <ActionList id={item.id} deleteItem={deleteItem} />
+                            <ActionList id={item.id} deleteItem={deleteItem} fromWhat="table" />
                         </TableCell>
                     </TableRow>
                 ))}

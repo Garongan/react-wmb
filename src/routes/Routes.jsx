@@ -6,13 +6,14 @@ import DashboardLayout from "@/pages/dashboard/DashboardLayout";
 import Bills from "@/pages/dashboard/bills/Bills";
 import Customers from "@/pages/dashboard/customers/Customers";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
-import TableIndex from "@/pages/dashboard/table/TableIndex";
+import MenuForm from "@/pages/dashboard/menu/MenuForm";
 import MenuIndex from "@/pages/dashboard/menu/MenuIndex";
+import MenuLayout from "@/pages/dashboard/menu/MenuLayout";
 import TableForm from "@/pages/dashboard/table/TableForm";
+import TableIndex from "@/pages/dashboard/table/TableIndex";
 import TableLayout from "@/pages/dashboard/table/TableLayout";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
-import MenuLayout from "@/pages/dashboard/menu/MenuLayout";
 
 const Routes = createBrowserRouter([
     {
@@ -93,11 +94,11 @@ const Routes = createBrowserRouter([
                     },
                     {
                         path: "new",
-                        element: <TableForm title="Menu Form" />,
+                        element: <MenuForm title="Menu Form" />,
                     },
                     {
                         path: "update/:id",
-                        element: <TableForm title="Update Menu Form" />,
+                        element: <MenuForm title="Update Menu Form" />,
                     },
                 ],
             },

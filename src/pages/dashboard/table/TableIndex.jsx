@@ -63,8 +63,8 @@ const DataList = ({ title }) => {
                     {title}
                 </h2>
             </div>
-            <Link to="/dashboard/table/new">
-                <Button>New Table</Button>
+            <Link to="/dashboard/table/new" className="pb-4">
+                <Button className="mb-4">New Table</Button>
             </Link>
             <TableList data={data?.data} deleteItem={deleteItem} />
         </>

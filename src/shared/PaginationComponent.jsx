@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/pagination";
 import PropTypes from "prop-types";
 
-const PaginationComponent = ({ paginationResponse, setPage }) => {
-    const { page, totalPages, hasNext, hasPrevious } = paginationResponse;
+const PaginationComponent = ({ paging, searchParams, setSearchParams }) => {
+    const { page, totalPages, hasNext, hasPrevious } = paging;
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -19,17 +19,21 @@ const PaginationComponent = ({ paginationResponse, setPage }) => {
     };
 
     const handlePrevious = () => {
-        hasPrevious && setPage((prev) => prev - 1);
+        if (hasPrevious) {
+            setSearchParams({ ...searchParams, page: page - 1 });
+        }
         scrollToTop();
     };
 
     const handleChangePage = (page) => {
-        setPage(page);
+        setSearchParams({ ...searchParams, page: page });
         scrollToTop();
     };
 
     const handleNext = () => {
-        hasNext && setPage((prev) => prev + 1);
+        if (hasNext) {
+            setSearchParams({ ...searchParams, page: page + 1 });
+        }
         scrollToTop();
     };
 
@@ -67,27 +71,32 @@ const PaginationComponent = ({ paginationResponse, setPage }) => {
     return (
         <Pagination>
             <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious
-                        onClick={handlePrevious}
-                        className="cursor-pointer"
-                    />
-                </PaginationItem>
+                {page === 1 ? null : (
+                    <PaginationItem>
+                        <PaginationPrevious
+                            onClick={handlePrevious}
+                            className="cursor-pointer"
+                        />
+                    </PaginationItem>
+                )}
                 {renderPaginationItems()}
-                <PaginationItem>
-                    <PaginationNext
-                        onClick={handleNext}
-                        className="cursor-pointer"
-                    />
-                </PaginationItem>
+                {page === totalPages ? null : (
+                    <PaginationItem>
+                        <PaginationNext
+                            onClick={handleNext}
+                            className="cursor-pointer"
+                        />
+                    </PaginationItem>
+                )}
             </PaginationContent>
         </Pagination>
     );
 };
 
 PaginationComponent.propTypes = {
-    paginationResponse: PropTypes.object,
-    setPage: PropTypes.func,
+    paging: PropTypes.object,
+    searchParams: PropTypes.object,
+    setSearchParams: PropTypes.func,
 };
 
 export default PaginationComponent;

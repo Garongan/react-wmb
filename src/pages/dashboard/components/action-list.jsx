@@ -18,19 +18,19 @@ import { useNavigate } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
-const ActionList = ({ deleteItem, id }) => {
+const ActionList = ({ deleteItem, id, fromWhat }) => {
     return (
         <QueryClientProvider client={queryClient}>
-            <Action deleteItem={deleteItem} id={id} />
+            <Action deleteItem={deleteItem} id={id} fromWhat={fromWhat} />
         </QueryClientProvider>
     );
 };
 
-const Action = ({ deleteItem, id }) => {
+const Action = ({ deleteItem, id, fromWhat }) => {
     const navigate = useNavigate();
 
     const handleUpdate = () => {
-        navigate(`/dashboard/table/update/${id}`);
+        navigate(`/dashboard/${fromWhat}/update/${id}`);
     };
 
     return (
@@ -70,11 +70,13 @@ const Action = ({ deleteItem, id }) => {
 ActionList.propTypes = {
     id: PropTypes.string,
     deleteItem: PropTypes.object,
+    fromWhat: PropTypes.string,
 };
 
 Action.propTypes = {
     deleteItem: PropTypes.object,
     id: PropTypes.string,
+    fromWhat: PropTypes.string,
 };
 
 export default ActionList;

@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import useMenuService from "@/services/useMenuService";
+import useCustomersService from "@/services/useCustomersService";
 import LoaderList from "@/shared/LoaderList";
+import PageSize from "@/shared/PageSize";
 import PaginationComponent from "@/shared/PaginationComponent";
 import {
     QueryClient,
@@ -11,20 +13,16 @@ import {
     useQuery,
     useQueryClient,
 } from "@tanstack/react-query";
+import { Search } from "lucide-react";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import MenuList from "./MenuList";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
-import PageSize from "@/shared/PageSize";
-import PriceFilter from "@/shared/PriceFilter";
+import { Link, useSearchParams } from "react-router-dom";
+import CustomersList from "./CustomersList";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const queryClient = new QueryClient();
-
-const MenuIndex = ({ title }) => {
+const CustomersIndex = ({ title }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <DataList title={title} />
@@ -34,11 +32,9 @@ const MenuIndex = ({ title }) => {
 
 const DataList = ({ title }) => {
     const queryClient = useQueryClient();
-    const { getAll, deleteById } = useMenuService();
+    const { getAll, deleteById } = useCustomersService();
     const [searchParams, setSearchParams] = useSearchParams();
     const name = searchParams.get("name") || "";
-    const minPrice = searchParams.get("minPrice") || "";
-    const maxPrice = searchParams.get("maxPrice") || "";
     const direction = searchParams.get("direction") || "asc";
     const sortBy = searchParams.get("sortBy") || "name";
     const page = searchParams.get("page") || 1;
@@ -66,13 +62,6 @@ const DataList = ({ title }) => {
         });
     };
 
-    const handleChangePageSize = (size) => {
-        setSearchParams({
-            ...searchParams,
-            size: size,
-        });
-    };
-
     const handleChangeDirection = (direction) => {
         setSearchParams({
             ...searchParams,
@@ -80,21 +69,18 @@ const DataList = ({ title }) => {
         });
     };
 
-    const handlePriceFilter = (minPrice, maxPrice) => {
+    const handleChangePageSize = (size) => {
         setSearchParams({
             ...searchParams,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
+            size: size,
         });
     };
 
     const { data, isSuccess } = useQuery({
-        queryKey: ["menus", name, minPrice, maxPrice, direction, sortBy, page, size],
+        queryKey: ["customers", name, direction, sortBy, page, size],
         queryFn: async () => {
             return await getAll({
                 name: name,
-                minPrice: minPrice,
-                maxPrice: maxPrice,
                 direction: direction,
                 sortBy: sortBy,
                 page: page,
@@ -108,7 +94,7 @@ const DataList = ({ title }) => {
     const deleteItem = useMutation({
         mutationFn: deleteById,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["menus"] });
+            queryClient.invalidateQueries({ queryKey: ["customers"] });
         },
         onError: (error) => {
             toast({
@@ -134,8 +120,8 @@ const DataList = ({ title }) => {
             </div>
             <div className="flex items-center mb-4 justify-between">
                 <div className="flex items-center gap-4">
-                    <Link to="/dashboard/menu/new">
-                        <Button>New Menu</Button>
+                    <Link to="/dashboard/customers/new">
+                        <Button>New Customer</Button>
                     </Link>
                     <Select onValueChange={handleChangeDirection}>
                         <SelectTrigger className="w-20">
@@ -147,9 +133,7 @@ const DataList = ({ title }) => {
                         </SelectContent>
                     </Select>
                 </div>
-
                 <div className="flex items-center gap-4">
-                    <PriceFilter handlePriceFilter={handlePriceFilter} />
                     <PageSize handleChangePageSize={handleChangePageSize} />
                     <form
                         className="flex max-w-sm items-center space-x-2"
@@ -168,13 +152,13 @@ const DataList = ({ title }) => {
                     </form>
                 </div>
             </div>
-            <MenuList data={data?.data} deleteItem={deleteItem} />
+            <CustomersList data={data?.data} deleteItem={deleteItem} />
             <PaginationComponent paging={paging} searchParams={searchParams} setSearchParams={setSearchParams} />
         </>
     );
 };
 
-MenuIndex.propTypes = {
+CustomersIndex.propTypes = {
     title: PropTypes.string,
 };
 
@@ -182,4 +166,4 @@ DataList.propTypes = {
     title: PropTypes.string,
 };
 
-export default MenuIndex;
+export default CustomersIndex;

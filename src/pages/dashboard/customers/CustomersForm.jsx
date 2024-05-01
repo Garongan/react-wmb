@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import useTableService from "@/services/useTableService";
+import useCustomersService from "@/services/useCustomersService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
@@ -15,10 +15,11 @@ const formSchema = z.object({
     name: z.string().min(2, {
         message: "Nama harus lebih dari 2 karakter.",
     }),
+    phone: z.string().optional(),
 });
 
-const TableForm = ({ title }) => {
-    const { create, getById, updateById } = useTableService();
+const CustomersForm = ({ title }) => {
+    const { create, getById, updateById } = useCustomersService();
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -27,6 +28,7 @@ const TableForm = ({ title }) => {
         mode: "onChange",
         defaultValues: {
             name: "",
+            phone: "",
         },
     });
 
@@ -34,10 +36,10 @@ const TableForm = ({ title }) => {
         const id = form.getValues("id");
         if (id) {
             try {
-                data = { id: id, name: data.name.toUpperCase() };
+                data = { id: id, ...data };
                 const response = await updateById(id, data);
                 if (response && response.statusCode === 200) {
-                    navigate("/dashboard/table");
+                    navigate("/dashboard/customers");
                 }
             } catch (error) {
                 toast({
@@ -47,11 +49,10 @@ const TableForm = ({ title }) => {
                 });
             }
         } else {
-            data = { ...data, name: data.name.toUpperCase() };
             try {
                 const response = await create(data);
                 if (response && response.statusCode === 201) {
-                    navigate("/dashboard/table");
+                    navigate("/dashboard/customers");
                 }
             } catch (error) {
                 toast({
@@ -68,6 +69,8 @@ const TableForm = ({ title }) => {
             const data = await getById(id);
             form.setValue("id", data?.data.id);
             form.setValue("name", data?.data.name);
+            if (data?.data.phoneNumber === null) form.setValue("phone", "");
+            else form.setValue("phone", data?.data.phoneNumber);
             form.trigger();
         };
         fetch();
@@ -85,9 +88,22 @@ const TableForm = ({ title }) => {
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Table Name</FormLabel>
+                                <FormLabel>Customer Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="T0..." {...field} className="uppercase" />
+                                    <Input placeholder="Customer Name..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Phone Number</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="089..." {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -100,8 +116,8 @@ const TableForm = ({ title }) => {
     );
 };
 
-TableForm.propTypes = {
+CustomersForm.propTypes = {
     title: PropTypes.string,
 };
 
-export default TableForm;
+export default CustomersForm;

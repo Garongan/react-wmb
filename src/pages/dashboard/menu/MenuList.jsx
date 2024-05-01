@@ -9,7 +9,7 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 import PropTypes from "prop-types";
-import ActionList from "../components/action-list";
+import ActionList from "../components/ActionList";
 
 const MenuList = ({ data, deleteItem }) => {
     return (

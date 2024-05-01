@@ -4,7 +4,6 @@ import Registration from "@/pages/auth/Registration";
 import Register from "@/pages/auth/components/Register";
 import DashboardLayout from "@/pages/dashboard/DashboardLayout";
 import Bills from "@/pages/dashboard/bills/Bills";
-import Customers from "@/pages/dashboard/customers/Customers";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
 import MenuForm from "@/pages/dashboard/menu/MenuForm";
 import MenuIndex from "@/pages/dashboard/menu/MenuIndex";
@@ -14,6 +13,9 @@ import TableIndex from "@/pages/dashboard/table/TableIndex";
 import TableLayout from "@/pages/dashboard/table/TableLayout";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
+import CustomersLayout from "@/pages/dashboard/customers/CustomersLayout";
+import CustomersIndex from "@/pages/dashboard/customers/CustomersIndex";
+import CustomersForm from "@/pages/dashboard/customers/CustomersForm";
 
 const Routes = createBrowserRouter([
     {
@@ -76,7 +78,7 @@ const Routes = createBrowserRouter([
                     },
                     {
                         path: "new",
-                        element: <TableForm title="Table Form" />,
+                        element: <TableForm title="Create Table Form" />,
                     },
                     {
                         path: "update/:id",
@@ -94,7 +96,7 @@ const Routes = createBrowserRouter([
                     },
                     {
                         path: "new",
-                        element: <MenuForm title="Menu Form" />,
+                        element: <MenuForm title="Create Menu Form" />,
                     },
                     {
                         path: "update/:id",
@@ -104,7 +106,21 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "customers",
-                element: <Customers />,
+                element: <CustomersLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <CustomersIndex title="Customers" />,
+                    },
+                    {
+                        path: "new",
+                        element: <CustomersForm title="Create Customer Form" />,
+                    },
+                    {
+                        path: "update/:id",
+                        element: <CustomersForm title="Update Customer Form" />,
+                    },
+                ]
             },
             {
                 path: "bills",

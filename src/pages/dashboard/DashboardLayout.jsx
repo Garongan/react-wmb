@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Outlet } from "react-router-dom";
-import DashboardHeader from "./components/dashboard-header";
+import DashboardHeader from "./components/DashboardHeader";
 
 const DashboardLayout = () => {
     return (

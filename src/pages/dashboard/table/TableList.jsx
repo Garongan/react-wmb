@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 
 import PropTypes from "prop-types";
-import ActionList from "../components/action-list";
+import ActionList from "../components/ActionList";
 
 const TableList = ({ data, deleteItem }) => {
     return (

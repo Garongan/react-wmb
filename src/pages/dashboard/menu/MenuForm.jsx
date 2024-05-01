@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/use-toast";
@@ -141,11 +141,10 @@ const MenuForm = ({ title }) => {
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Menu name</FormLabel>
+                                <FormLabel>Menu Name</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Menu Baru..." {...field} />
                                 </FormControl>
-                                <FormDescription>Tambah Menu Baru</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -159,7 +158,6 @@ const MenuForm = ({ title }) => {
                                 <FormControl>
                                     <Input placeholder="Harga Menu Baru..." {...field} />
                                 </FormControl>
-                                <FormDescription>Tambah Menu Baru</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -187,7 +185,6 @@ const MenuForm = ({ title }) => {
                                         }}
                                     />
                                 </FormControl>
-                                <FormDescription>Tambah Menu Baru</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}

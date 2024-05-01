@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import MonthRevenue from "./month-revenue";
-import OrderDetails from "./order-details";
-import OrderList from "./order-list";
-import WeekRevenue from "./week-revenue";
+import MonthRevenue from "./MonthRevenue";
+import OrderDetails from "./OrderDetails";
+import OrderList from "./OrderList";
+import WeekRevenue from "./WeekRevenue";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 

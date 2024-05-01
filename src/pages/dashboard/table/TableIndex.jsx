@@ -11,6 +11,7 @@ import {
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import TableList from "./TableList";
+import LoaderList from "@/shared/LoaderList";
 
 const queryClient = new QueryClient();
 
@@ -54,7 +55,7 @@ const DataList = ({ title }) => {
         },
     });
 
-    if (!isSuccess) return <div>Loading...</div>;
+    if (!isSuccess) return <LoaderList />;
 
     return (
         <>

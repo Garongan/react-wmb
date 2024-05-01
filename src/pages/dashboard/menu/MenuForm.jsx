@@ -80,7 +80,7 @@ const MenuForm = ({ title }) => {
                     price: data.price,
                 };
                 formData.append("menu", JSON.stringify(updatedData));
-                if (data.image === "") {
+                if (data.image[0]) {
                     formData.append("image", data.image[0]);
                 }
                 const response = await updateById(id, formData);
@@ -97,14 +97,13 @@ const MenuForm = ({ title }) => {
         } else {
             try {
                 const formData = new FormData();
-                const updatedData = {
-                    id: id,
+                const newData = {
                     name: data.name,
                     price: data.price,
                 };
-                formData.append("menu", JSON.stringify(updatedData));
+                formData.append("menu", JSON.stringify(newData));
                 formData.append("image", data.image[0]);
-                const response = await create(data);
+                const response = await create(formData);
                 if (response && response.statusCode === 201) {
                     navigate("/dashboard/menu");
                 }
@@ -124,7 +123,6 @@ const MenuForm = ({ title }) => {
             form.setValue("id", data?.data.id);
             form.setValue("name", data?.data.name);
             form.setValue("price", data?.data.price.toString());
-            // form.setValue("image", data?.data.imageResponse.url);
             setPreviewImage(data?.data.imageResponse.url);
             form.trigger();
         };
@@ -179,9 +177,9 @@ const MenuForm = ({ title }) => {
                                 <FormLabel>Upload Gambar Menu</FormLabel>
                                 <FormControl>
                                     <Input
+                                        {...rest}
                                         type="file"
                                         accept="image/png, image/jpg, image/jpeg, image/svg+xml"
-                                        {...rest}
                                         onChange={(event) => {
                                             const { files, displayUrl } = handleImageChange(event);
                                             setPreviewImage(displayUrl);

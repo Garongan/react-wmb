@@ -3,8 +3,11 @@ import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import useMenuService from "@/services/useMenuService";
+import { priceFormat } from "@/shared/usePriceFormat";
+import { TicketCheck } from "lucide-react";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const BillsList = ({ data }) => {
     const { getById } = useMenuService();
@@ -15,13 +18,6 @@ const BillsList = ({ data }) => {
         return arr.filter((item, index) => {
             return arr.findIndex((t) => t.billdetailId === item.billdetailId) === index;
         });
-    };
-
-    const priceFormat = (price) => {
-        return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-        }).format(price);
     };
 
     const openDetails = (item) => {
@@ -84,7 +80,8 @@ const BillsList = ({ data }) => {
                         <TableHead>Table Name</TableHead>
                         <TableHead>Transaction Type</TableHead>
                         <TableHead>Transaction Status</TableHead>
-                        <TableHead className="text-right w-64">Detail</TableHead>
+                        <TableHead className="text-right">Payment Link</TableHead>
+                        <TableHead className="text-right">Detail</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -117,6 +114,11 @@ const BillsList = ({ data }) => {
                                 >
                                     {item.payment.transactionStatus}
                                 </div>
+                            </TableCell>
+                            <TableCell className="text-right">
+                                <Link to={item.payment.redirectUrl}>
+                                    <Button><TicketCheck className="mr-2 h-4 w-4"/>Open Link</Button>
+                                </Link>
                             </TableCell>
                             <TableCell className="text-right">
                                 <Sheet>

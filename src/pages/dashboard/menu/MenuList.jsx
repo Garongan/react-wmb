@@ -10,6 +10,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import PropTypes from "prop-types";
 import ActionList from "../components/ActionList";
+import { priceFormat } from "@/shared/usePriceFormat";
 
 const MenuList = ({ data, deleteItem }) => {
     return (
@@ -30,10 +31,7 @@ const MenuList = ({ data, deleteItem }) => {
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{item.name}</TableCell>
                             <TableCell>
-                                {new Intl.NumberFormat("id-ID", {
-                                    style: "currency",
-                                    currency: "IDR",
-                                }).format(item.price)}
+                                {priceFormat(item.price)}
                             </TableCell>
                             <TableCell>
                                 {item.imageResponse ? (

@@ -9,14 +9,12 @@ const Login = () => {
                 <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl">
                     <div className="container relative grid h-[800px] flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
                         <Link to={"/register"}
-                            className="hover:bg-zinc-900 hover:text-zinc-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 absolute right-4 top-4 md:right-8 md:top-8"
-                            href="/examples/authentication"
-                        >
+                            className="hover:bg-zinc-900 hover:text-zinc-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 absolute right-4 top-4 md:right-8 md:top-8">
                             Registration
                         </Link>
                         <div className="relative hidden h-full flex-col bg-muted text-white lg:flex dark:border-r">
                             <div className="absolute inset-0 bg-zinc-900">
-                                <img src="public/banner.jpg" alt="banner" />
+                                <img src="/banner.jpg" alt="banner" />
                             </div>
                             <div className="relative z-20 flex items-center text-lg font-medium bg-gradient-to-b from-black to-tranparent p-5">
                                 <Ship className="me-3" />

@@ -1,4 +1,9 @@
-# React + Vite
+# React Warung Makan Bahari
+
+### Important
+This is frontend of warung makan bahari app or WMB. WMB application has backend and frontend application
+This app won't run perfectfully without backend operation from this link
+[https://github.com/Garongan/spring-wmb-api](https://github.com/Garongan/spring-wmb-api)
 
 ### Run Guide
 
